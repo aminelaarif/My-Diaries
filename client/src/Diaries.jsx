@@ -1,8 +1,24 @@
-import React from 'react'
+import React,{useState} from 'react'
 
-function Diaries() {
+function Diaries({diar, deletediary}) {
+//   console.log(diaries)
+  console.log( deletediary)
   return (
-    <div>Diaries</div>
+    
+    
+    <div>
+       <h1> {diar.title}</h1>
+        <h1> {diar.description}</h1>
+        <h1>{diar.date}</h1>
+        <h1>{diar.iddiary}</h1>
+      <button onClick={()=>{deletediary(diar.iddiary)}} >delete</button>
+    
+
+        
+        </div>
+
+        
+     
   )
 }
 
