@@ -4,7 +4,7 @@ const app = express();
 var cors = require('cors')
 app.use(express.json())
 app.use(cors())
-const {insertUser,getAllDiaries,addDiary,deleteDiary,getUsers,updateDiary,getOneUser,getOneDiary} = require("../db/index")
+const {insertUser,getAllDiaries,addDiary,deleteDiary,getUsers,updateDiary,getOneUser,getOneDiary,getOneUserinfo} = require("../db/index")
 
 
 
@@ -12,7 +12,7 @@ const {insertUser,getAllDiaries,addDiary,deleteDiary,getUsers,updateDiary,getOne
 
 ////////////////////////////////////////////////////////////////////
 app.post("/api/users",(req,res)=>{
-    insertUser(req.body.username,req.body.password).then((result)=>{
+    insertUser(req.body.username,req.body.password,req.body.fullname).then((result)=>{
         res.json(result[0])
     }).catch((error)=>{
         res.json(error)
@@ -27,12 +27,13 @@ getUsers().then((result)=>{
 })
 })
 
+
 app.post("/api/login",(req,res)=>{
     getOneUser(req.body.username,req.body.password).then((result)=>{
-        console.log(req.body.username)
+        
         const user=result[0][0]
         if(user){
-            console.log(user)
+          
             if(user.password===req.body.password){
                 res.json(result[0][0])
                }
@@ -40,12 +41,21 @@ app.post("/api/login",(req,res)=>{
                 res.json("wrong password")
                }
            
-        }else {
-           
-            res.json('incorrect information');
-          
+        }else{
+           res.json("incorrect infos")
         }
-        
+       console.log(result,"fdf") 
+    }).catch((error)=>{
+       
+        res.json(error);
+    })
+})
+
+
+
+app.get("/api/users/:id",(req,res)=>{
+    getOneUserinfo(req.params.id).then((result)=>{
+        res.json(result[0])
     }).catch((error)=>{
         res.json(error)
     })

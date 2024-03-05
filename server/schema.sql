@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS `my_diaries`.`users` (
   `idusers` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(45) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
+  `fullname` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idusers`),
   UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE)
 ENGINE = InnoDB;
@@ -35,7 +36,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `my_diaries`.`diary` (
   `iddiary` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(45) NOT NULL,
-  `description` VARCHAR(45) NOT NULL,
+  `description` VARCHAR(500) NOT NULL,
   `date` VARCHAR(45) NOT NULL,
   `users_idusers` INT NOT NULL,
   PRIMARY KEY (`iddiary`),

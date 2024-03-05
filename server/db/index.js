@@ -15,11 +15,12 @@ connection.connect().then(()=>{
 })
 
 
-/////////////////////////////////////////////////////////////////////
+//!                         USERS QUERY 
+//************************************************************************************* */
 
-const insertUser = (username,password)=>{
-    const sql = "insert into `users` (username,password) values (?,?)"
-    let result = connection.query(sql,[username,password])
+const insertUser = (username,password,fullname)=>{
+    const sql = "insert into `users` (username,password,fullname) values (?,?,?)"
+    let result = connection.query(sql,[username,password,fullname])
     return result
 }
 
@@ -36,15 +37,21 @@ const getOneUser=(username,password)=>{
   let result = connection.query(sql,[username,password])
   return result
 }
-//////////////////////////////////////////////////////////////////////////////////////////
+
+const getOneUserinfo=(id)=>{
+    const sql = "select * from `users` where `idusers`=(?)"
+    let result = connection.query(sql,[id]) 
+    return result
+}
 
 
 
+//****************************************************************************************************** */
 
 
 
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//!                                     DIARIES QUERY 
+//********************************************************************************************************* */
 
 const getAllDiaries = ()=>{
     const sql = "select * from `diary` "
@@ -77,8 +84,7 @@ const updateDiary =(title,description,id)=>{
     let result = connection.query(sql,[title,description,id])
     return result
 }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//*********************************************************************** */
 
 module.exports = {
     insertUser,
@@ -88,5 +94,6 @@ module.exports = {
     updateDiary,
     getUsers,
     getOneUser,
-    getOneDiary
+    getOneDiary,
+    getOneUserinfo
 }
